@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container row col-md-12" style="margin-left: 0%;">
+  <h1 id="header">{{ message }}</h1>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <p><input type="file" name="file"></p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+    <h2>User Table</h2>
+    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+    <br>
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>TImestamp</th>
+            <th>Email address</th>
+            <th>name</th>
+            <th>city</th>
+            <th>contact</th>
+            <th>age</th>
+            <th>most recent company</th>
+            <th>Role/Job in Company</th>
+            <th>current CTC</th>
+            <th>Fixed Component in CTC</th>
+            <th>Experience in months</th>
+            <th>Are you comfortable working 6 days a week</th>
+            <th>Are you willing to relocate Mumbai</th>
+            <th>Rate yourself on verbal english</th>
+            <th>Skills you have worked in</th>
+            <th>which of industries you have worked in</th>
+            <th>What kind of profile would you like to work in after working in Sales/Business development?</th>
+            <th>3 factors that matter the most to you while selecting a job?</th>
+        </tr>
+        </thead>
+        <tbody id="myTable">
+            {% for value in data%}
+            <tr>
+              <td>{{ value.timestamp }}</td>
+              <td>{{ value.email }}</td>
+              <td>{{ value.name }}</td>
+              <td>{{ value.city }}</td>
+              <td>{{ value.contact }}</td>
+              <td>{{ value.age }}</td>
+              <td>{{ value.recent_company }}</td>
+              <td>{{ value.role_in_company }}</td>
+              <td>{{ value.current_ctc }}</td>
+              <td>{{ value.fixed_component_ctc }}</td>
+              <td>{{ value.experience }}</td>
+              <td>{{ value.comfort }}</td>
+              <td>{{ value.relocate }}</td>
+              <td>{{ value.rate_english }}</td>
+              <td>{{ value.skills }}</td>
+              <td>{{ value.industries }}</td>
+              <td>{{ value.profile }}</td>
+              <td>{{ value.factors }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+
+<script>
+    var heading = $("#header");
+    setInterval(function() {
+      if (heading.style.display == "block") { heading.style.display = "none"; }
+      else if (heading.style.display == "none") { heading.style.display = "block"; }
+    }, 1000);
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
+</body>
+</html>
